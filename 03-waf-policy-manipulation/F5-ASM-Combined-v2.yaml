@@ -19,11 +19,13 @@
       inline: yes
       force: yes
     register: ASM_Policy
+    when: Blocked_URLs is defined or Blocked_IPs is defined
 
 #Output Data to File due to BUG 1390
   - copy:
       content: "{{ ASM_Policy.inline_policy }}"
       dest: "{{ ASM_Policy_File }}"
+    when: Blocked_URLs is defined or Blocked_IPs is defined
 
 #Validate Existing IP Addresses
   - name: Validate Existing IP Addresses
@@ -31,9 +33,10 @@
     register: Blocked_IP_Valid
     with_items: "{{ Blocked_IPs }}"
     ignore_errors: yes
+    when: Blocked_IPs is defined
 
-#Import Additional Disallowed URLs
-  - name: Add Disallowed URLs
+#Import Additional Disallowed IPs
+  - name: Add Disallowed IPs
     xml:
       path: "{{ ASM_Policy_File }}"
       pretty_print: yes
@@ -42,25 +45,61 @@
       xpath: /policy/geolocation
       add_children: "<whitelist><ip_address>{{ item.item }}</ip_address><subnet_mask>255.255.255.255</subnet_mask><policy_builder_trusted>false</policy_builder_trusted><ignore_anomalies>false</ignore_anomalies><never_log>false</never_log><block_ip>Always</block_ip><never_learn>false</never_learn><description>blocked</description><ignore_ip_reputation>false</ignore_ip_reputation></whitelist>"
     with_items: "{{ Blocked_IP_Valid.results }}"
-    when: item.rc == 1
+    when: Blocked_IPs is defined and item.rc == 1
+
+#Validate Existing URL Addresses
+  - name: Validate Existing URL Addresses
+    shell: grep 'name="{{ item }}"' {{ ASM_Policy_File }}
+    register: Blocked_URLs_Valid
+    with_items: "{{ Blocked_URLs }}"
+    ignore_errors: yes
+    when: Blocked_URLs is defined
+
+#create Disallowed URLs Section if missing
+  - name: Add Disallowed URLs
+    xml:
+      path: "{{ ASM_Policy_File }}"
+      input_type: xml
+      pretty_print: yes
+      insertafter: yes
+      xpath: /policy/urls/url[*]
+      add_children: "<disallowed_urls></disallowed_urls>"
+    when: "'<disallowed_urls>' not in lookup('file', ASM_Policy_File ) and Blocked_URLs is defined"
+
+#Import Additional Disallowed URLs
+  - name: Add Disallowed URLs
+    xml:
+      path: "{{ ASM_Policy_File }}"
+      input_type: xml
+      pretty_print: yes
+      xpath: /policy/urls/disallowed_urls
+      add_children:
+        - "<url protocol=\"HTTP\" type=\"explicit\" name=\"{{ item.item }}\"/>"
+        - "<url protocol=\"HTTPS\" type=\"explicit\" name=\"{{ item.item }}\"/>"
+    with_items: "{{ Blocked_URLs_Valid.results }}"
+    when: Blocked_URLs is defined and item.rc == 1
+
 
 #Re-Deploy ASM policy
   - name: Create an LTM policy
     bigip_policy:
      name: asm-policy
      state: present
+    when: Blocked_URLs is defined or Blocked_IPs is defined
 
   - name: Import ASM policy
     bigip_asm_policy_import:
      name: Demo
      source: "{{ ASM_Policy_File }}"
      force: yes
+    when: Blocked_URLs is defined or Blocked_IPs is defined
 
   - name: Activate ASM policy
     bigip_asm_policy_manage:
      name: Demo
      active: yes
      state: present
+    when: Blocked_URLs is defined or Blocked_IPs is defined
 
   - name: Replace a forward action with an ASM action
     bigip_policy_rule:
@@ -69,9 +108,11 @@
      actions:
      - type: enable
        asm_policy: Demo
+    when: Blocked_URLs is defined or Blocked_IPs is defined
 
  #Re-Deploy Draft ASM policy
   - name: Deploy Draft ASM policy
     bigip_policy:
      name: asm-policy
      state: present
+    when: Blocked_URLs is defined or Blocked_IPs is defined
