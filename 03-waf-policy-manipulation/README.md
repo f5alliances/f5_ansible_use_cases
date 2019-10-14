@@ -9,7 +9,6 @@ Blocked_URLs:
   \- /blocked.html  
   \- /hacked.html  
   \- /robot.txt  
-
 Blocked_IPs:  
   \- 10.192.1.199  
   \- 10.105.192.199  
