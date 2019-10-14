@@ -1,6 +1,6 @@
 ## Extra-Variables in Ansible
 
-ASM_Policy_File: "/tmp/XML-Policy.xml"
+ASM_Policy_File: "/tmp/XML-Policy.xml"  
 F5_IPAddress: 10.192.1.219  
 F5_Admin_Port: '443'  
 F5_Username: admin  
