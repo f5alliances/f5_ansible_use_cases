@@ -15,7 +15,7 @@
 #Fetch ASM_Policy to Variable
   - name: Fetching ASM Policy
     bigip_asm_policy_fetch:
-      name: Demo
+      name: "{{ ASM_Policy_Name }}"
       inline: yes
       force: yes
     register: ASM_Policy
@@ -89,14 +89,14 @@
 
   - name: Import ASM policy
     bigip_asm_policy_import:
-     name: Demo
+     name: "{{ ASM_Policy_Name }}"
      source: "{{ ASM_Policy_File }}"
      force: yes
     when: Blocked_URLs is defined or Blocked_IPs is defined
 
   - name: Activate ASM policy
     bigip_asm_policy_manage:
-     name: Demo
+     name: "{{ ASM_Policy_Name }}"
      active: yes
      state: present
     when: Blocked_URLs is defined or Blocked_IPs is defined
@@ -107,7 +107,7 @@
      name: rule1
      actions:
      - type: enable
-       asm_policy: Demo
+       asm_policy: "{{ ASM_Policy_Name }}"
     when: Blocked_URLs is defined or Blocked_IPs is defined
 
  #Re-Deploy Draft ASM policy
