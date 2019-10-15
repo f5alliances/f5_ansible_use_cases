@@ -13,20 +13,20 @@
     
   vars:
     F5_VIP_Name: "{{ F5_VIP_App_Name }}"
-    SSL_Cert_Name: "{{ Cert_Name }}"
-    SSL_Key_Name: "{{ Key_Name }}"
+    SSL_Cert: "{{ Cert_Name }}"
+    SSL_Key: "{{ Key_Name }}"
     SSL_Friendly_Name: "{{ F5_Cert_Friendly_Name }}"
 
   tasks:
   - name: SSL cert upload
     bigip_ssl_certificate:
       name: "{{SSL_Friendly_Name}}_Cert"
-      content: "{{ lookup('file', SSL_Cert_Name) }}"
+      content: "{{ lookup('file', SSL_Cert) }}"
 
-  - name: SSL cert upload
+  - name: SSL key upload
     bigip_ssl_key:
       name: "{{SSL_Friendly_Name}}_Key"
-      content: "{{ lookup('file', SSL_Key_Name) }}"
+      content: "{{ lookup('file', SSL_Key) }}"
 
   - name: Create a client SSL profile with a cert/key/chain setting
     bigip_profile_client_ssl:
@@ -37,8 +37,8 @@
         key: "{{SSL_Friendly_Name}}_Key"
 
   - name: UPDATE A VIRTUAL SERVER
-    bigip_virtual_server:"
-     name: "{{F5_VIP_Name}}"
+    bigip_virtual_server:
+     name: "{{ F5_VIP_Name }}"
      profiles:
      - name: "{{SSL_Friendly_Name}}_ClientSSL_profile"
        context: client-side
