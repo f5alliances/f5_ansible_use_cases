@@ -1,4 +1,4 @@
-- name: Creating HTTPS application
+- name: Creating HTTP-Redirect for Existing Application
   hosts: localhost
   connection: local
   
@@ -19,10 +19,6 @@
       gather_subset:
         - virtual-servers
     register: VS_Info
-
-  - debug:
-      msg: "{{ item.name }}"
-    with_items: "{{ VS_Info.virtual_servers }}"
 
   - name: Create a redirect virtual server
     bigip_virtual_server:
