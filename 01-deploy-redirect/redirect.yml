@@ -11,17 +11,18 @@
     F5_SERVER: "{{ F5_IPAddress }}"
     
   vars:
-   vip_name: '{{ VIP_Application }}"
+   vip_name: "{{ VIP_Application }}"
    
   tasks: 
 - name: Collect BIG-IP facts on Virtual Server
-  bigip_facts:
-    include:
+  bigip_device_facts:
+    gather_subset:
       - virtual_server
       - virtual_address
     register: VIP_Info
  
- - debug: msg="{{ VIP_Info }}"
+ - debug: 
+     msg: "{{ VIP_Info }}"
  
 # - name: Create a redirect virtual server
 #   bigip_virtual_server:
