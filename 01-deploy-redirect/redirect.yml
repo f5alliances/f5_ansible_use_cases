@@ -21,8 +21,8 @@
       - virtual_address
     register: VIP_Info
  
- - debug: 
-     msg: "{{ VIP_Info }}"
+- debug: 
+    msg: "{{ VIP_Info }}"
  
 # - name: Create a redirect virtual server
 #   bigip_virtual_server:
