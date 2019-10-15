@@ -11,7 +11,7 @@
     F5_SERVER: "{{ F5_IPAddress }}"
     
   vars:
-    F5_VIP_Name: "{{ VIP_Application }}"
+    F5_VIP_Name: "{{ F5_VIP_App_Name }}"
 
   tasks:
   - name: Collect BIG-IP facts on Virtual Server
