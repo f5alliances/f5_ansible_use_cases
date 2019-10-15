@@ -13,8 +13,7 @@
   vars:
    vip_name: '{{ VIP_Application }}"
    
-  tasks:
-  
+  tasks: 
 - name: Collect BIG-IP facts on Virtual Server
   bigip_facts:
     include:
