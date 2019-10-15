@@ -1,0 +1,44 @@
+---
+- name: Cert Management on BIG-IP
+  hosts: localhost
+  connection: local
+
+#Environment variables defined
+  environment:
+    F5_USER: "{{ F5_Username }}"
+    F5_PASSWORD: "{{ F5_Password }}"
+    F5_SERVER_PORT: "{{ F5_Admin_Port }}" #"443"
+    F5_VALIDATE_CERTS: "False"
+    F5_SERVER: "{{ F5_IPAddress }}"
+    
+  vars:
+    F5_VIP_Name: "{{ F5_VIP_App_Name }}"
+    SSL_Cert_Name: "{{ Cert_Name }}"
+    SSL_Key_Name: "{{ Key_Name }}"
+    SSL_Friendly_Name: "{{ F5_Cert_Friendly_Name }}"
+
+  tasks:
+  - name: SSL cert upload
+    bigip_ssl_certificate:
+      name: "{{SSL_Friendly_Name}}_Cert"
+      content: "{{ lookup('file', SSL_Cert_Name) }}"
+
+  - name: SSL cert upload
+    bigip_ssl_key:
+      name: "{{SSL_Friendly_Name}}_Key"
+      content: "{{ lookup('file', SSL_Key_Name) }}"
+
+  - name: Create a client SSL profile with a cert/key/chain setting
+    bigip_profile_client_ssl:
+     state: present
+     name: "{{SSL_Friendly_Name}}_ClientSSL_profile"
+     cert_key_chain:
+      - cert: "{{SSL_Friendly_Name}}_Cert"
+        key: "{{SSL_Friendly_Name}}_Key"
+
+  - name: UPDATE A VIRTUAL SERVER
+    bigip_virtual_server:"
+     name: "{{F5_VIP_Name}}"
+     profiles:
+     - name: "{{SSL_Friendly_Name}}_ClientSSL_profile"
+       context: client-side
