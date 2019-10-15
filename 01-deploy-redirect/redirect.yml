@@ -1,67 +1,36 @@
 - name: Creating HTTPS application
+  hosts: localhost
   connection: local
-  gather_facts: false
-  hosts: lb
-
+  
+#Environment variables defined
+  environment:
+    F5_USER: "{{ F5_Username }}"
+    F5_PASSWORD: "{{ F5_Password }}"
+    F5_SERVER_PORT: "{{ F5_Admin_Port }}" #"443"
+    F5_VALIDATE_CERTS: "False"
+    F5_SERVER: "{{ F5_IPAddress }}"
+    
   vars:
-   pool_name: 'http-pool'
-   vip_name: 'myApplication"
+   vip_name: '{{ VIP_Application }}"
    
   tasks:
-      
-  - set_fact:
-     provider:
-      server: "{{private_ip}}"
-      user: "{{ansible_user}}"
-      password: "{{ansible_ssh_pass}}"
-      server_port: 8443
-      validate_certs: no
-
-  - name: Create node
-    bigip_node:
-      provider: "{{provider}}"
-      host: "{{hostvars[item].ansible_host}}"
-      name: "{{hostvars[item].inventory_hostname}}"
-    loop: "{{ groups['webservers'] }}"
-    
-  - name: Create pool
-    bigip_pool:
-      provider: "{{provider}}"
-      name: "{{pool_name}}"
-      lb_method: "round-robin"
-      monitors: "/Common/http"
-      monitor_type: "and_list"
-    
-  - name: Add members to pool
-    bigip_pool_member:
-      provider: "{{provider}}"
-      state: "present"
-      name: "{{hostvars[item].inventory_hostname}}"
-      host: "{{hostvars[item].ansible_host}}"
-      port: "80"
-      pool: "{{pool_nme}}"
-    
-  - name: Create Virtual Server
-    bigip_virtual_server:
-       description: "Secure web application"
-       provider: "{{provider}}"   
-       name: "{{vip_name}}"
-       destination: "{{private_ip}}"
-       port: 443
-       snat: "Automap"
-       all_profiles:
-       - http
-       - clientssl
-       pool: "{{pool_name}}"
-    
-  - name: Create a redirect virtual server
-    bigip_virtual_server:
-       description: "Redirect Virtual server"
-       provider: "{{provider}}"   
-       name: "http_redirect"
-       destination: "{{private_ip}}"
-       port: 80
-       all_profiles:
-       - http
-       all_rules:
-       - _sys_https_redirect
+  
+- name: Collect BIG-IP facts on Virtual Server
+  bigip_facts:
+    include:
+      - virtual_server
+      - virtual_address
+    register: VIP_Info
+ 
+ - debug: msg="{{ VIP_Info }}"
+ 
+# - name: Create a redirect virtual server
+#   bigip_virtual_server:
+#     description: "Redirect Virtual server"   
+#      name: "http_redirect"
+#      destination: "{{private_ip}}"
+#      port: 80
+#      all_profiles:
+#      - http
+#      all_rules:
+#      - _sys_https_redirect
