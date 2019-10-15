@@ -11,26 +11,28 @@
     F5_SERVER: "{{ F5_IPAddress }}"
     
   vars:
-   vip_name: "{{ VIP_Application }}"
-   
-  tasks: 
-- name: Collect BIG-IP facts on Virtual Server
-  bigip_device_facts:
-    gather_subset:
-      - virtual_server
-      - virtual_address
-    register: VIP_Info
- 
-- debug: 
-    msg: "{{ VIP_Info }}"
- 
-# - name: Create a redirect virtual server
-#   bigip_virtual_server:
-#     description: "Redirect Virtual server"   
-#      name: "http_redirect"
-#      destination: "{{private_ip}}"
-#      port: 80
-#      all_profiles:
-#      - http
-#      all_rules:
-#      - _sys_https_redirect
+    F5_VIP_Name: "{{ VIP_Application }}"
+
+  tasks:
+  - name: Collect BIG-IP facts on Virtual Server
+    bigip_device_facts:
+      gather_subset:
+        - virtual-servers
+    register: VS_Info
+
+  - debug:
+      msg: "{{ item.name }}"
+    with_items: "{{ VS_Info.virtual_servers }}"
+
+  - name: Create a redirect virtual server
+    bigip_virtual_server:
+      description: "Redirect Virtual server"
+      name: "{{ item.name }}_http_redirect"
+      destination: "{{item.destination_address}}"
+      port: "80"
+      all_profiles:
+       - http
+      all_rules:
+       - _sys_https_redirect
+    when: item.name == F5_VIP_Name
+    with_items: "{{ VS_Info.virtual_servers }}"
