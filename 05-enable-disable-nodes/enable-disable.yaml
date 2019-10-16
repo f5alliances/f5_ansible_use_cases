@@ -27,4 +27,4 @@
         name: "{{item}}"
         state: "enabled"
       when: F5_Node_State|lower == "enabled"
-      with_items: "{{ F5_Nodes }}
+      with_items: "{{ F5_Nodes }}"
