@@ -1,4 +1,4 @@
-- name: Enabling or Disabling LTM Nodes
+- name: Enabling or Disabling Nodes in BIG-IP
   hosts: localhost
   connection: local
   
