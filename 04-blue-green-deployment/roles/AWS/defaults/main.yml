@@ -8,6 +8,20 @@ webserver_type: "centos"
 
 # Additional info needed by AWS ec2 modules
 ec2_info:
+  centos-tower:
+    name: "CentOS Linux 7 x86_64 HVM EBS *"
+    size: t2.medium
+    os_type: linux
+    disk_space: 20
+    architecture: x86_64
+    username: centos
+  centos:
+    name: "CentOS Linux 7 x86_64 HVM EBS *"
+    size: t2.micro
+    os_type: linux
+    disk_space: 10
+    architecture: x86_64
+    username: centos
   f5node:
     name: "F5 Networks Prelicensed Hourly BIGIP-13.1.0.7-0.0.1 - Best 25MBPS *"    
     product_code: "3ouya04g99e5euh4vbxtao1jz"
