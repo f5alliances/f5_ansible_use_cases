@@ -18,7 +18,7 @@
   - name: Create Pool
     bigip_pool:
      name: "{{ F5_VIP_Name }}_pool"
-	when: F5_New_Pool_Members is defined
+    when: F5_New_Pool_Members is defined
 
   - name: Add Pool Members
     bigip_pool_member:
@@ -32,16 +32,16 @@
      port: "{{ F5_New_Pool_Members_Port }}"
      description: "{{ F5_VIP_Name }}_pool"
     when: F5_New_Pool_Members is defined and F5_New_Pool_Members_Port is defined
-	with_items: {{ F5_New_Pool_Members }} 
+    with_items: {{ F5_New_Pool_Members }} 
 
   - name: UPDATE A VIRTUAL SERVER
     bigip_virtual_server:
      name: "{{ F5_VIP_Name }}"
      pool: "{{F5_VIP_Name}}_pool"
-	when: F5_New_Pool_Members is defined and F5_New_Pool_Members_Port is defined
+    when: F5_New_Pool_Members is defined and F5_New_Pool_Members_Port is defined
 
   - name: UPDATE A VIRTUAL SERVER
     bigip_virtual_server:
      name: "{{ F5_VIP_Name }}"
      pool: "{{ F5_New_Pool_Name }}"
-	when: F5_New_Pool_Name is defined
+    when: F5_New_Pool_Name is defined
