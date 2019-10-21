@@ -10,10 +10,7 @@
     F5_SERVER_PORT: "{{ F5_Admin_Port }}" #"443"
     F5_VALIDATE_CERTS: "False"
     F5_SERVER: "{{ F5_IPAddress }}"
-
-#  vars:
-#    F5_VIP_Name: "{{ F5_VIP_App_Name }}"
-
+    
   tasks:
   - name: Create Pool
     bigip_pool:
