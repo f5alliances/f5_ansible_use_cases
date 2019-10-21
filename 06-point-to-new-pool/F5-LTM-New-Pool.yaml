@@ -23,7 +23,7 @@
   - name: Add Pool Members
     bigip_pool_member:
      pool: "{{ F5_VIP_Name }}_pool"
-	when: F5_New_Pool_Members is defined and F5_New_Pool_Members_Port is defined
+    when: F5_New_Pool_Members is defined and F5_New_Pool_Members_Port is defined
 
   - name: Add pool member
     bigip_pool_member:
