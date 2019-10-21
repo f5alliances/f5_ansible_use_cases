@@ -32,7 +32,7 @@
      port: "{{ F5_New_Pool_Members_Port }}"
      description: "{{ F5_VIP_Name }}_pool"
     when: F5_New_Pool_Members is defined and F5_New_Pool_Members_Port is defined
-    with_items: {{ F5_New_Pool_Members }} 
+    with_items: "{{ F5_New_Pool_Members }}"
 
   - name: UPDATE A VIRTUAL SERVER
     bigip_virtual_server:
