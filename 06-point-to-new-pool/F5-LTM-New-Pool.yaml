@@ -23,22 +23,22 @@
   - name: Add Pool Members
     bigip_pool_member:
      pool: "{{ F5_VIP_Name }}_pool"
-    when: F5_New_Pool_Members is defined and F5_New_Pool_Members_Port is defined
+    when: F5_New_Pool_Members is defined
 
   - name: Add pool member
     bigip_pool_member:
      pool: "{{ F5_VIP_Name }}_pool"
-     host: "{{ item }}"
-     port: "{{ F5_New_Pool_Members_Port }}"
+     host: "{{ item.IP }}"
+     port: "{{ item.Port }}"
      description: "{{ F5_VIP_Name }}_pool"
-    when: F5_New_Pool_Members is defined and F5_New_Pool_Members_Port is defined
     with_items: "{{ F5_New_Pool_Members }}"
-
+    when: F5_New_Pool_Members is defined
+    
   - name: UPDATE A VIRTUAL SERVER
     bigip_virtual_server:
      name: "{{ F5_VIP_Name }}"
      pool: "{{F5_VIP_Name}}_pool"
-    when: F5_New_Pool_Members is defined and F5_New_Pool_Members_Port is defined
+    when: F5_New_Pool_Members is defined
 
   - name: UPDATE A VIRTUAL SERVER
     bigip_virtual_server:
