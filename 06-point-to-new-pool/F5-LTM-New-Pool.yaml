@@ -1,0 +1,47 @@
+---
+- name: New Pool Member and Swap
+  hosts: localhost
+  connection: local
+
+#Environment variables defined
+  environment:
+    F5_USER: "{{ F5_Username }}"
+    F5_PASSWORD: "{{ F5_Password }}"
+    F5_SERVER_PORT: "{{ F5_Admin_Port }}" #"443"
+    F5_VALIDATE_CERTS: "False"
+    F5_SERVER: "{{ F5_IPAddress }}"
+    
+  vars:
+    F5_VIP_Name: "{{ F5_VIP_App_Name }}"
+	
+  tasks:
+  - name: Create Pool
+    bigip_pool:
+     name: "{{ F5_VIP_Name }}_pool"
+	when: F5_New_Pool_Members is defined
+	
+  - name: Add Pool Members
+    bigip_pool_member:
+     pool: "{{ F5_VIP_Name }}_pool"
+	when: F5_New_Pool_Members is defined and F5_New_Pool_Members_Port is defined
+	
+  - name: Add pool member
+    bigip_pool_member:
+     pool: "{{ F5_VIP_Name }}_pool"
+     host: "{{ item }}"
+     port: "{{ F5_New_Pool_Members_Port }}"
+     description: "{{ F5_VIP_Name }}_pool"
+    when: F5_New_Pool_Members is defined and F5_New_Pool_Members_Port is defined
+	with_items: {{ F5_New_Pool_Members }} 
+
+  - name: UPDATE A VIRTUAL SERVER
+    bigip_virtual_server:
+     name: "{{ F5_VIP_Name }}"
+     pool: "{{F5_VIP_Name}}_pool"
+	when: F5_New_Pool_Members is defined and F5_New_Pool_Members_Port is defined
+
+  - name: UPDATE A VIRTUAL SERVER
+    bigip_virtual_server:
+     name: "{{ F5_VIP_Name }}"
+     pool: "{{ F5_New_Pool_Name }}"
+	when: F5_New_Pool_Name is defined
