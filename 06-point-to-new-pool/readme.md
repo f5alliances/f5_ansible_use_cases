@@ -3,6 +3,10 @@ F5_Admin_Port: '443'
 F5_Username: admin
 F5_Password: VMware123!
 F5_VIP_Name: Test-VIP
+#F5_New_Pool_Monitors: "http,gateway_icmp"
+F5_New_Pool_Monitors: "http"
+F5_New_Pool_LB_Method: least-connections-member
+
 #- Only works if F5_Pool_Name Exists and F5_New_Pool_Members doesnt exist (Commented out or missing)
 #F5_Pool_Name: http-pool
 
