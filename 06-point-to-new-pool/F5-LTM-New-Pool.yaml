@@ -19,9 +19,8 @@
     bigip_pool:
      name: "{{ F5_VIP_Name }}_pool"
      lb_method: "{{ F5_New_Pool_LB_Method }}"
-     monitors: "{{ item }}"
+     monitors: "{{ F5_New_Pool_Monitors }}"
     when: F5_New_Pool_Members is defined and F5_New_Pool_LB_Method is defined and F5_New_Pool_Monitors is defined
-    with_items: "{{ F5_New_Pool_Monitors}}"
 
   - name: Add pool member
     bigip_pool_member:
