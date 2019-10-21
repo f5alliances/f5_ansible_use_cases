@@ -35,12 +35,6 @@
      pool: "{{F5_VIP_Name}}_pool"
     when: F5_New_Pool_Members is defined
 
-  - name: UPDATE A VIRTUAL SERVER
-    bigip_virtual_server:
-     name: "{{ F5_VIP_Name }}"
-     pool: "{{F5_VIP_Name}}_pool"
-    when: F5_New_Pool_Members is defined
-    
   - name: UPDATE A VIRTUAL SERVER With Pool (When No New Pool is Defined)
     bigip_virtual_server:
      name: "{{ F5_VIP_Name }}"
