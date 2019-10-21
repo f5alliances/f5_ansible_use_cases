@@ -20,7 +20,7 @@
      name: "{{ F5_VIP_Name }}_pool"
      lb_method: "{{F5_New_Pool_LB_Method}}"
      monitors: "{{ item }}"
-    when: F5_New_Pool_Members is defined and F5_New_Pool_LB_Method and F5_New_Pool_Monitor
+    when: F5_New_Pool_Members is defined and F5_New_Pool_LB_Method is defined and F5_New_Pool_Monitor is defined
     with_items: "{{ F5_New_Pool_Monitors}}"
 
   - name: Add pool member
