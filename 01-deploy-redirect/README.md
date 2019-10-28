@@ -32,7 +32,7 @@ Now you can start to provision a Lab Environment in AWS.
   - Using Ansible Tower copy the variables out of the f5_vars.yml file and place into the Extra Variables field in the Template.
 ![f5 diagram](images/Ansible_Tower_Vars.png)
 
-  - (Optional) - Using Ansible Playbook:
+  - (Alternative Option) - Using Ansible Playbook:
 
         ansible-playbook F5-LTM-HTTP-Redirect.yml -e @f5_vars.yml
         
