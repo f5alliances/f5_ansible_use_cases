@@ -6,9 +6,7 @@
 
 This use case will configure the BIG-IP To import certificates (cert/key), create (if doesnt already exist) a ClientSSL Profile and assign it to an assigned pre-existing VIP.
 
-## Per workshop Setup
-
-Now you can start to provision a Lab Environment in AWS.
+## Use Case Setup
 
 1. Confiure f5_vars.yml to reflect your environment under provisioning.
   ```yaml
