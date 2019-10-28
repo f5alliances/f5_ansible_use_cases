@@ -1,3 +1,7 @@
+# PREREQUISITES
+- Ansible Engine v2.8.0 or higher.
+- BIG-IP Setup and Configured
+
 ## Extra-Variables in Ansible Tower  
 
 ```
@@ -7,3 +11,34 @@ F5_Username: admin
 F5_Password: VMware123!  
 F5_VIP_App_Name: Test2-VIP  
 ```
+
+## Per workshop Setup
+
+Now you can start to provision a Lab Environment in AWS.
+
+1. Confiure f5_vars.yml to reflect your environment under provisioning.
+  ```yaml
+        # Modify based on deployment
+        F5_IPAddress: 10.192.1.219
+        F5_Admin_Port: '443'
+        F5_Username: admin
+        F5_Password: VMware123!
+        F5_VIP_App_Name: Test2-VIP
+  ```
+- if using F5_Provisioner use the Workbench information that is stored in a local directory named after the workshop (e.g. TESTWORKSHOP1/instructor_inventory.txt).  Example:
+   ```handlebars
+   [all:vars]
+   ansible_port=22
+
+   [student1]
+   student1-ansible ansible_host=34.219.251.xxx ansible_user=centos 
+   student1-f5 ansible_host=52.39.228.xxx ansible_user=admin
+   student1-host1 ansible_host=52.43.153.xxx ansible_user=centos
+   student1-host2 ansible_host=34.215.176.xxx ansible_user=centos
+   ```
+
+2. Run the playbook (if using using ansible directly):
+
+        ansible-playbook provision_lab.yml -e @f5_vars.yml
+        
+3. If using Ansible Tower copy the variables out of the f5_vars.yml file and place into the Extra Variables field in the Template.
