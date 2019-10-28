@@ -17,8 +17,10 @@ This use case will configure the BIG-IP To Enable or Disable LTM Nodes.
         F5_Admin_Port: '443'
         F5_Username: admin
         F5_Password: VMware123!
+        
         #F5_Node_State - can be Enabled or Disabled (case not sensitve)
         F5_Node_State: Disabled
+        
         #F5_Nodes - Must be exact names of Nodes within LTM --> Nodes
         F5_Nodes:
         - 192.168.30.50
