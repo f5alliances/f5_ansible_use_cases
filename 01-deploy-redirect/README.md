@@ -37,9 +37,12 @@ Now you can start to provision a Lab Environment in AWS.
    student1-host2 ansible_host=34.215.176.xxx ansible_user=centos
    ```
 
-2. Run the playbook (if using using ansible directly):
+2. Run the playbook 
+
+2A. If using Ansible Tower copy the variables out of the f5_vars.yml file and place into the Extra Variables field in the Template.
+![f5 diagram](images/Ansible_Tower_Vars.png)
+
+2B. (Optional) - Using Ansible Playbook:
 
         ansible-playbook F5-LTM-HTTP-Redirect.yml -e @f5_vars.yml
         
-3. If using Ansible Tower copy the variables out of the f5_vars.yml file and place into the Extra Variables field in the Template.
-![f5 diagram](images/Ansible_Tower_Vars.png)
