@@ -1,6 +1,7 @@
 # PREREQUISITES
 - Ansible Engine v2.8.0 or higher.
 - BIG-IP Setup and Configured
+- LXML PIP Module
 
 ## Overview of Use Case
 
