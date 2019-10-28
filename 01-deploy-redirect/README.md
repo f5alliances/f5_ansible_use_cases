@@ -32,6 +32,6 @@ This use case will configure the BIG-IP To create a Redirect to Port 80 from a p
    ```
 
 2. Using Ansible Playbook:
-
-        ansible-playbook F5-LTM-HTTP-Redirect.yml -e @f5_vars.yml
-        
+```
+   ansible-playbook F5-LTM-HTTP-Redirect.yml -e @f5_vars.yml
+```        
