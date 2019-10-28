@@ -31,12 +31,7 @@ This use case will configure the BIG-IP To create a Redirect to Port 80 from a p
    student1-host2 ansible_host=34.215.176.xxx ansible_user=centos
    ```
 
-2. Run the playbook 
-
-  - Using Ansible Tower copy the variables out of the f5_vars.yml file and place into the Extra Variables field in the Template.
-![f5 diagram](images/Ansible_Tower_Vars.png)
-
-  - (Alternative Option) - Using Ansible Playbook:
+2. Using Ansible Playbook:
 
         ansible-playbook F5-LTM-HTTP-Redirect.yml -e @f5_vars.yml
         
