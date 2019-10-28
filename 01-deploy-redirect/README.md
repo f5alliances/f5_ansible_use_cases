@@ -8,9 +8,7 @@ This use case will configure the BIG-IP To create a Redirect to Port 80 from a p
   
 **Note: this will loop through the entire VIP list so this could take a long time depending on the amount of VIPs within your BIG-IP**
 
-## Per workshop Setup
-
-Now you can start to provision a Lab Environment in AWS.
+## Use Case Setup
 
 1. Confiure f5_vars.yml to reflect your environment under provisioning.
   ```yaml
