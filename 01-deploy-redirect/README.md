@@ -39,6 +39,6 @@ Now you can start to provision a Lab Environment in AWS.
 
 2. Run the playbook (if using using ansible directly):
 
-        ansible-playbook provision_lab.yml -e @f5_vars.yml
+        ansible-playbook F5-LTM-HTTP-Redirect.yml -e @f5_vars.yml
         
 3. If using Ansible Tower copy the variables out of the f5_vars.yml file and place into the Extra Variables field in the Template.
