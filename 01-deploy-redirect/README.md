@@ -2,16 +2,6 @@
 - Ansible Engine v2.8.0 or higher.
 - BIG-IP Setup and Configured
 
-## Extra-Variables in Ansible Tower  
-
-```
-F5_IPAddress: 10.192.1.219  
-F5_Admin_Port: '443'  
-F5_Username: admin  
-F5_Password: VMware123!  
-F5_VIP_App_Name: Test2-VIP  
-```
-
 ## Per workshop Setup
 
 Now you can start to provision a Lab Environment in AWS.
@@ -25,7 +15,7 @@ Now you can start to provision a Lab Environment in AWS.
         F5_Password: VMware123!
         F5_VIP_App_Name: Test2-VIP
   ```
-  - if using F5_Provisioner use the Workbench information that is stored in a local directory named after the workshop (e.g. TESTWORKSHOP1/instructor_inventory.txt).  Example:
+if using F5_Provisioner use the Workbench information that is stored in a local directory named after the workshop (e.g. TESTWORKSHOP1/instructor_inventory.txt).  Example:
    ```handlebars
    [all:vars]
    ansible_port=22
