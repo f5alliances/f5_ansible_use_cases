@@ -6,7 +6,7 @@
 
 This use case will configure the BIG-IP To modify an existing ASM Policy to Block IP's and URL's.  
   
-**Note: This Use case can be used in an either/or or combined scenario, meaning you can Block URLs or IPs or Both**
+**Note: This Use case can be used in an either/or or combined scenario, meaning you can Block URLs or IPs or Both.  This Playbook will also detect if Blocked URL or IP already exists and only add what is new.**
 
 ## Per workshop Setup
 
