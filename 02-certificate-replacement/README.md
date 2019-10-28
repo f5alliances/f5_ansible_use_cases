@@ -4,9 +4,7 @@
 
 ## Overview of Use Case
 
-This use case will configure the BIG-IP To import certificates (cert/key), create a ClientSSL Profile and assign it to a pre-existing VIP, **OR** Assign .  
-  
-**Note: this will loop through the entire VIP list so this could take a long time depending on the amount of VIPs within your BIG-IP**
+This use case will configure the BIG-IP To import certificates (cert/key), create (if doesnt already exist) a ClientSSL Profile and assign it to an assigned pre-existing VIP.
 
 ## Per workshop Setup
 
