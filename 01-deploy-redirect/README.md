@@ -15,7 +15,7 @@ Now you can start to provision a Lab Environment in AWS.
         F5_Password: VMware123!
         F5_VIP_App_Name: Test2-VIP
   ```
-if using F5_Provisioner use the Workbench information that is stored in a local directory named after the workshop (e.g. TESTWORKSHOP1/instructor_inventory.txt).  Example:
+   - if using F5_Provisioner use the Workbench information that is stored in a local directory named after the workshop (e.g.    TESTWORKSHOP1/instructor_inventory.txt).  Example:
    ```handlebars
    [all:vars]
    ansible_port=22
