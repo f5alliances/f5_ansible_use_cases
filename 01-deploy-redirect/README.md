@@ -4,7 +4,9 @@
 
 ## Overview of Use Case
 
-This use case will configure the BIG-IP To create a Redirect to Port 80 from a pre-existing VIP.  (Note this will loop through the entire VIP list so this could take a long time depending on the amount of VIPs within your BIG-IP)
+This use case will configure the BIG-IP To create a Redirect to Port 80 from a pre-existing VIP.  
+  
+**Note: this will loop through the entire VIP list so this could take a long time depending on the amount of VIPs within your BIG-IP**
 
 ## Per workshop Setup
 
