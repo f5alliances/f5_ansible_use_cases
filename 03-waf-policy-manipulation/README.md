@@ -14,13 +14,6 @@ Now you can start to provision a Lab Environment in AWS.
 
 1. Confiure f5_vars.yml to reflect your environment under provisioning.
   ```yaml
-        # Modify based on deployment
-        F5_IPAddress: 10.192.1.219
-        F5_Admin_Port: '443'
-        F5_Username: admin
-        F5_Password: VMware123!
-        F5_VIP_App_Name: Test2-VIP
-        
         ASM_Policy_Name: "Demo"
         ASM_Policy_File: "/tmp/XML-Policy.xml"
         F5_IPAddress: 10.192.1.219
