@@ -1,0 +1,9 @@
+---
+F5_Admin_Port: "8443"
+F5_VIP_Name: Use-Case-5-VIP
+
+#F5_New_Pool_Members is a multi-variable array to allow for IP/Port Combos
+F5_New_Pool_Members: 
+- {"IP": "192.168.30.50", "Port": "443"}
+- {"IP": "192.168.30.51", "Port": "80"}
+- {"IP": "192.168.30.52", "Port": "22443"}

@@ -4,17 +4,20 @@
   gather_facts: false
   
 #Environment variables defined
-  environment:
-    F5_USER: "{{ ansible_user }}"
-    F5_PASSWORD: "{{ ansible_ssh_pass }}"
-    F5_SERVER_PORT: "{{ F5_Admin_Port }}" 
-    F5_VALIDATE_CERTS: "False"
-    F5_SERVER: "{{ private_ip }}"
-    
   tasks:
+  - name: Setup provider
+    set_fact:
+     provider:
+      server: "{{private_ip}}"
+      user: "{{ansible_user}}"
+      password: "{{ansible_ssh_pass}}"
+      server_port: "8443"
+      validate_certs: "no"
+
 #Creeate VIP and Pool Member for Use Case
   - name: Create Pool with Members
     bigip_pool:
+      provider: "{{provider}}"
       state: present
       name: "{{ F5_VIP_Name }}_pool"
       lb_method: round-robin
