@@ -1,17 +1,47 @@
-  
+---  
 - name: ASM Policy Update with Blocked URLS, IPs or Both
-  hosts: localhost
+  hosts: lb
   connection: local
-  
+  gather_facts: false 
+
 #Environment variables defined
   environment:
-    F5_USER: "{{ F5_Username }}"
-    F5_PASSWORD: "{{ F5_Password }}"
-    F5_SERVER_PORT: "{{ F5_Admin_Port }}" #"443"
+    F5_USER: "{{ ansible_user }}"
+    F5_PASSWORD: "{{ ansible_ssh_pass }}"
+    F5_SERVER_PORT: "{{ F5_Admin_Port }}"
     F5_VALIDATE_CERTS: "False"
-    F5_SERVER: "{{ F5_IPAddress }}"
+    F5_SERVER: "{{ private_ip }}"
 
   tasks:
+#Provision BIGIP-ASM
+  - name: Provision ASM
+    bigip_provision:
+      module: asm
+
+#Create Pool and Virtual Server for Use Case
+  - name: Create Pool with Members
+    bigip_pool:
+      state: present
+      name: "{{ F5_VIP_Name }}_pool"
+      lb_method: round-robin
+      monitors:
+        - http
+
+  - name: Add Pool Members
+    bigip_pool_member:
+      state: present
+      pool: "{{ F5_VIP_Name }}_pool"
+      name: "{{hostvars[item].inventory_hostname}}"
+      host: "{{hostvars[item].private_ip}}"
+      port: "80"
+    loop: "{{ groups['webservers'] }}"
+
+#Create ASM Policy
+  - name: Create ASM Policy
+    bigip_asm_policy_manage:
+      name: "{{ ASM_Policy_Name }}"
+      active: no
+
 #Fetch ASM_Policy to Variable
   - name: Fetching ASM Policy
     bigip_asm_policy_fetch:
@@ -79,6 +109,19 @@
     with_items: "{{ Blocked_URLs_Valid.results }}"
     when: Blocked_URLs is defined and item.rc == 1
 
+#Enable Illegal URL Blocking Violations
+  - name: Illegal URL Blocking Violations Enablement
+    xml:
+      path: "{{ ASM_Policy_File }}"
+      input_type: xml
+      pretty_print: yes
+      xpath: /policy/blocking/violation[@name="Illegal URL"]
+      set_children:
+        - "<alarm>true</alarm>"
+        - "<block>true</block>"
+        - "<learn>true</learn>"
+        - "<policy_builder_tracking>enabled</policy_builder_tracking>"
+    when: Blocked_URLs is defined  
 
 #Re-Deploy ASM policy
   - name: Create an LTM policy
@@ -94,13 +137,6 @@
      force: yes
     when: Blocked_URLs is defined or Blocked_IPs is defined
 
-  - name: Activate ASM policy
-    bigip_asm_policy_manage:
-     name: "{{ ASM_Policy_Name }}"
-     active: yes
-     state: present
-    when: Blocked_URLs is defined or Blocked_IPs is defined
-
   - name: Replace a forward action with an ASM action
     bigip_policy_rule:
      policy: asm-policy
@@ -110,9 +146,36 @@
        asm_policy: "{{ ASM_Policy_Name }}"
     when: Blocked_URLs is defined or Blocked_IPs is defined
 
- #Re-Deploy Draft ASM policy
   - name: Deploy Draft ASM policy
     bigip_policy:
      name: asm-policy
      state: present
+     rules:
+     - rule1
     when: Blocked_URLs is defined or Blocked_IPs is defined
+
+#Assign ASM Policy to VIP
+  - name: Create a HTTPS Virtual Server
+    bigip_virtual_server:
+      state: present
+      description: "Https Virtual Server"
+      name: "{{ F5_VIP_Name }}_https_vip"
+      destination: "{{ private_ip }}"
+      port: "8082"
+      pool: "{{ F5_VIP_Name }}_pool"
+      snat: Automap
+      profiles:
+       - http
+       - oneconnect
+       - name: clientssl
+         context: client-side
+       - websecurity
+      policies:
+       - asm-policy
+    when: F5_VIP_Name is defined
+
+#Apply Draft ASM policy
+  - name: Activate ASM Policy
+    bigip_asm_policy_manage:
+      name: "{{ ASM_Policy_Name }}"
+      active: yes
