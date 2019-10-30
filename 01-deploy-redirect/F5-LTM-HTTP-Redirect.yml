@@ -11,7 +11,7 @@
       server: "{{private_ip}}"
       user: "{{ansible_user}}"
       password: "{{ansible_ssh_pass}}"
-      server_port: "8443"
+      server_port: "{{F5_Admin_Port}}"
       validate_certs: "no"
 
 #Creeate VIP and Pool Member for Use Case
@@ -27,6 +27,7 @@
   - name: Add Pool Members
     bigip_pool_member:
       state: present
+      provider: "{{provider}}"
       pool: "{{ F5_VIP_Name }}_pool"
       name: "{{hostvars[item].inventory_hostname}}"
       host: "{{hostvars[item].private_ip}}"
@@ -35,8 +36,9 @@
 
   - name: Create a HTTPS Virtual Server
     bigip_virtual_server:
+      provider: "{{provider}}"
       state: present
-      description: "Https Virtual Server"
+      description: "HTTPS Virtual Server"
       name: "{{ F5_VIP_Name }}_https_vip"
       destination: "{{ private_ip }}"
       port: "443"
@@ -52,6 +54,7 @@
 #Create HTTP Redirect VS
   - name: Create a HTTP Redirect Virtual Server
     bigip_virtual_server:
+      provider: "{{provider}}"
       description: "Redirect Virtual server"
       name: "{{ F5_VIP_Name }}_http_redirect"
       destination: "{{ private_ip }}"
