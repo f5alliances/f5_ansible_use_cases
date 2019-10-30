@@ -46,26 +46,27 @@
     loop_control:
       label: "{{item.name}}"
 
-  - name: Store pool name in a variable
-    set_fact:
-     pool_name: "{{item.name}}"
-    loop: "{{bigip_facts.ltm_pools}}"
-    no_log: true
-
   - pause:
       prompt: "enter name of pool to edit"
     register: pool_name_selection
     when: pool_action|lower == "disable" or pool_action|lower == "enable"
 
-  - debug:
-      msg: {{bigip_facts.ltm.pools}}
+  - name: Store pool name in a variable
+    set_fact:
+     pool_name: "{{item.name}}"
+    loop: "{{bigip_facts.ltm_pools}}"
+    when: item.name == pool_name_selection.user_input
+    no_log: true
 
+  - fail:
+      msg: "The Pool entered \"{{pool_name_selection.user_input}}\" is not a valid pool on the BIG-IP"
+    when: pool_name is undefined
 
-  - name: "Show members belonging to pool {{pool_name_selection}}"
+  - name: "Show members belonging to pool {{pool_name}}"
     debug: "msg={{item}}"
     loop: "{{bigip_facts.ltm_pools | json_query(query_string)}}"
     vars:
-     query_string: "[?name=='{{pool_name}}'].members['{{pool_name_selection}}'].{name: name, address: address}" #.name[]"
+     query_string: "[?name=='{{pool_name}}'].members[*].{name: name, address: address}" #.name[]"
 
   - pause:
       prompt: "To disable/enable a particular member enter member with format member_name:port \nTo disable/enable all members of the pool enter 'all'"
@@ -75,14 +76,14 @@
   - name: Disable ALL pool members
     bigip_pool_member:
       provider: "{{provider}}"
-      state: "enabled"
+      state: "forced_offline"
       name: "{{item.split(':')[0]}}"
-      pool: "{{pool_name_selection}}"
+      pool: "{{pool_name}}"
       port: "{{item.split(':')[1]}}"
       host: "{{hostvars[item.split(':')[0]].ansible_host}}"
     loop: "{{bigip_facts.ltm_pools | json_query(query_string)}}"
     vars:
-     query_string: "[?name=='{{pool_name_selection}}'].members[*].name[]"
+     query_string: "[?name=='{{pool_name}}'].members[*].name[]"
     when: '"all" in member_name.user_input and pool_action|lower  == "disable"'
 
   - name: Disable pool member {{member_name.user_input}}
@@ -90,7 +91,7 @@
       provider: "{{provider}}"
       state: "forced_offline"
       name: "{{member_name.user_input.split(':')[0]}}"
-      pool: "{{pool_name_selection}}"
+      pool: "{{pool_name}}"
       port: "{{member_name.user_input.split(':')[1]}}"
       host: "{{hostvars[member_name.user_input.split(':')[0]].ansible_host}}"
     when: '"all" not in member_name.user_input and pool_action|lower  == "disable"'
@@ -101,12 +102,12 @@
       provider: "{{provider}}"
       state: "enabled"
       name: "{{item.split(':')[0]}}"
-      pool: "{{pool_name_selection}}"
+      pool: "{{pool_name}}"
       port: "{{item.split(':')[1]}}"
       host: "{{hostvars[item.split(':')[0]].ansible_host}}"
     loop: "{{bigip_facts.ltm_pools | json_query(query_string)}}"
     vars:
-     query_string: "[?name=='{{pool_name_selection}}'].members[*].name[]"
+     query_string: "[?name=='{{pool_name}}'].members[*].name[]"
     when: '"all" in member_name.user_input and pool_action|lower  == "enable"'
 
   - name: Enable pool member {{member_name.user_input}}
@@ -114,7 +115,7 @@
       provider: "{{provider}}"
       state: "enabled"
       name: "{{member_name.user_input.split(':')[0]}}"
-      pool: "{{pool_name_selection}}"
+      pool: "{{pool_name}}"
       port: "{{member_name.user_input.split(':')[1]}}"
       host: "{{hostvars[member_name.user_input.split(':')[0]].ansible_host}}"
     when: '"all" not in member_name.user_input and pool_action|lower  == "enable"'
