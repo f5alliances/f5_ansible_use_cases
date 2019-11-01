@@ -21,4 +21,4 @@ With F5 Automation provisioner and these Scenario Use Cases, users can/will be a
 Follow [F5 Ansible AWS Provisioner](https://github.com/f5alliances/f5_provisioner) for detailed steps to spin up and tear down the sandbox infrastructure using provisioner
 
 ## Support
-This project is a community effort to promote Network and Security automation and is maintained by F5 BD. For any feature requests or issues, feel free to open an [issue](https://github.com/f5alliances/f5_provisioner/issues) and we will give our best effort to address it.
+This project is a community effort to promote Network and Security automation and is maintained by F5 Business Development (BD). For any feature requests or issues, feel free to open an [issue](https://github.com/f5alliances/f5_provisioner/issues) and we will give our best effort to address it.
