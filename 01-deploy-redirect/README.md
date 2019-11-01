@@ -2,9 +2,9 @@
 - Instance of the [F5 Ansible AWS Provisioner](https://github.com/f5alliances/f5_provisioner) deployed
 
 ## Overview of Use Case
-This scenario will configure the BIG-IP To create a Redirect to Port 80 from a pre-existing VIP.  
+This scenario will configure the BIG-IP to create a Redirect to Port 80 from a pre-existing VIP.  
 
-When a BIG-IP has multiple Virtual IPs (VIPs) configured, it can be tedious to implement an SSL (Port 443) redirect from standard HTTP traffic.  This automation playbook will create an SSL VIP then create the assosicative Port 80 SSL redirect for that VIP.
+When a BIG-IP has multiple Virtual IPs (VIPs) configured, it can be tedious to implement an SSL (Port 443) redirect from standard HTTP traffic.  This automation playbook will create an SSL VIP then create the associative Port 80 SSL redirect for that VIP.
 
 This script can be modified to work on other VIPs by editing the F5_VIP_Name section inside of the f5_vars.yaml
   
@@ -32,9 +32,9 @@ This script can be modified to work on other VIPs by editing the F5_VIP_Name sec
 ```
 ![Use-Case 1](../images/UseCase1-960.gif)
  
-3. Testing and Validing 
+3. Testing and Validating 
 ```
-- Using the workbench information Login to the BIG-IP (e.g. student1-f5 ansbile_host=PUBLIC-IP) using the ansbile_host Public IP on port 8443 (e.g. https://PUBLIC-IP:8443) to view the BIG-IP Admin page 
+- Using the workbench information Login to the BIG-IP (e.g. student1-f5 ansible_host=PUBLIC-IP) using the ansible_host Public IP on port 8443 (e.g. https://PUBLIC-IP:8443) to view the BIG-IP Admin page 
   
 - To view the deployed use case access port 80/443 of the same Public IP Address (e.g. http://PUBLIC-IP) 
 ``` 
