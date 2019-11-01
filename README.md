@@ -47,7 +47,7 @@ Follow [F5 Ansible AWS Provisioner](https://github.com/f5alliances/f5_provisione
     <img src="images/Github-960.gif">
    </kbd>   
 
-   <br/><br/>
+   <br/>
   
 3. Launch a Playbook via the use cases.
 
