@@ -31,7 +31,7 @@ This script can be modified to work on other VIPs by editing the F5_VIP_Name sec
    ansible-playbook F5-LTM-HTTP-Redirect.yml -e @f5_vars.yml
 ```
 ![Use-Case 1](../images/UseCase1-960.gif)
-
+ 
 3. Testing and Validing 
 ```
 - Using the workbench information Login to the BIG-IP (e.g. student1-f5 ansbile_host=PUBLIC-IP) using the ansbile_host Public IP on port 8443 (e.g. https://PUBLIC-IP:8443) to view the BIG-IP Admin page 
