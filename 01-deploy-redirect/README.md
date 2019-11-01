@@ -1,32 +1,32 @@
 # PREREQUISITES
-- Instance of the [F5 Ansible AWS Provisioner](https://github.com/f5alliances/f5_provisioner) deployed
+- This usecase assumes that a F5 BIG-IP instance, webservers and Ansible node are deployed. To deploy infrastructure in AWS users can use the [F5 Ansible Provisioner](https://github.com/f5alliances/f5_provisioner)
 
 ## Overview of Use Case
-This scenario will configure the BIG-IP to create a Redirect to Port 80 from a pre-existing VIP.  
+Challenge: When a BIG-IP has multiple Virtual IPs (VIPs) configured, it can be tedious to implement an SSL redirect from standard HTTP traffic for each Virtual IP. 
 
-When a BIG-IP has multiple Virtual IPs (VIPs) configured, it can be tedious to implement an SSL (Port 443) redirect from standard HTTP traffic.  This automation playbook will create an SSL VIP then create the associative Port 80 SSL redirect for that VIP.
+F5-LTM-HTTP-Redirect.yml playbook will create an SSL VIP then create the associative Port 80 SSL redirect for that VIP.
 
-This script can be modified to work on other VIPs by editing the F5_VIP_Name section inside of the f5_vars.yaml
+In this example, the playbook looks for F5_VIP_Name: 'Use-Case-1-VIP' as specified in the f5_vars.yaml variable file. Users can modify this variable file to create redirect service for any other VIP. 
   
-**Note: this will loop through the entire VIP list so this could take a long time depending on the number of VIPs within your BIG-IP**
+**Note: this will loop through the entire VIP list so this could take time depending on the number of VIPs within your BIG-IP**
 
 ## Use Case Setup
 
-1. Login to the Ansible Host provided by the F5 Ansible AWS Provisioner 
-   - Use the Workbench information that is stored in a local directory named after the workshop (e.g. TESTWORKSHOP1/instructor_inventory.txt).  Example:
+1. Login to the Ansible Host. 
+Code below is based on infrastructure components provisioned by the [F5 Provisioner](https://github.com/f5alliances/f5_provisioner). TESTWORKSHOP1/instructor_inventory.txt file will contain the Workbench information. Example:
 
 ```handlebars
    [all:vars]
    ansible_port=22
 
    [student1]
-   student1-ansible ansible_host=34.219.251.xxx ansible_user=centos
-   student1-f5 ansible_host=52.39.228.xxx ansible_user=admin 
-   student1-host1 ansible_host=52.43.153.xxx ansible_user=centos
-   student1-host2 ansible_host=34.215.176.xxx ansible_user=centos
+   student1-ansible ansible_host=10.10.10.11 ansible_user=centos #ansible host
+   student1-f5 ansible_host=10.10.10.21 ansible_user=admin #F5 BIG-IP
+   student1-host1 ansible_host=10.10.10.31 ansible_user=centos #Webserver1
+   student1-host2 ansible_host=10.10.10.32 ansible_user=centos #webserver2
 ```
 
-2. Launching the Ansible Playbook:
+2. Running the Ansible Playbook 'F5-LTM-HTTP-Redirect.yml' with the variable file 'f5_vars.yml' :
 ```
    cd ~/f5_ansible_use_cases
    ansible-playbook F5-LTM-HTTP-Redirect.yml -e @f5_vars.yml
@@ -34,8 +34,7 @@ This script can be modified to work on other VIPs by editing the F5_VIP_Name sec
 ![Use-Case 1](../images/UseCase1-960.gif)
  
 3. Testing and Validating 
-  - Using the workbench information Login to the BIG-IP (e.g. student1-f5 ansible_host=PUBLIC-IP) 
-  - Use the ansible_host Public IP on port 8443 (e.g. https://PUBLIC-IP:8443) to view the BIG-IP Admin page (eg: https://52.39.228.xxx:8443)
-  - To view the deployed use case access port 80/443 of the same Public IP Address (e.g. http://52.39.228.xxx) 
+  - Using the workbench information Login to the BIG-IP (e.g. student1-f5 ansible_host=10.10.10.21:8443) and ensure there is 2 VIPs with same IP - one with port 443 and one with port 80
+  - You should be able be redirected to 443 when you try to access VIP:80. The same webpage will also be accessible via VIP:443
  
-**NOTE: The browser certificate used is the default certificate built with the BIG-IP and will be UNTRUSTED by default.**
+**NOTE: While accessing the Virtual IP, your browser is presented with a certificate (clientssl cert) that is built with the BIG-IP. You will therefore see an 'unsafe' message. Click proceed to website.**
