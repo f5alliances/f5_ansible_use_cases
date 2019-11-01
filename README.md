@@ -15,10 +15,27 @@ With F5 Automation provisioner and these Scenario Use Cases, users can/will be a
 - Provide feedback on existing and new use cases that are relevant to everyday work
 (More features will be added soon)
 
-![f5 Provisioner](images/Provisioner-960.gif)
-
 ## How to use?
 Follow [F5 Ansible AWS Provisioner](https://github.com/f5alliances/f5_provisioner) for detailed steps to spin up and tear down the sandbox infrastructure using provisioner
+
+1. Login to the Ansible Host (studentX-ansible) provided by the F5 Ansible AWS Provisioner
+  ```
+   - Use the Workbench information that is stored in a local directory named after the workshop (e.g. TESTWORKSHOP1/instructor_inventory.txt).  Example:
+   ```handlebars
+   [all:vars]
+   ansible_port=22
+
+   [student1]
+   student1-ansible ansible_host=34.219.251.xxx ansible_user=centos 
+   student1-f5 ansible_host=52.39.228.xxx ansible_user=admin
+   student1-host1 ansible_host=52.43.153.xxx ansible_user=centos
+   student1-host2 ansible_host=34.215.176.xxx ansible_user=centos
+   ```
+
+2. Download the f5_ansible_use_cases Repo on the Ansible host
+![GitHub Download](images/Github-960.gif)
+
+3. Launch a Playbook via the use cases.
 
 ## Support
 This project is a community effort to promote Network and Security automation and is maintained by F5 Business Development (BD). For any feature requests or issues, feel free to open an [issue](https://github.com/f5alliances/f5_provisioner/issues) and we will give our best effort to address it.
