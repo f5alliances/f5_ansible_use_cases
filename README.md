@@ -6,7 +6,7 @@ The Use Cases for the F5 Automation Provisioner to Test Common Secnarios. This i
 New Use Cases will be Added Periodically to Provide Additional Senarios for BIG-IP Modules.
 
 ## Prerequisites
-Deployment of the F5 Automation Provisioner 
+- F5 Automation Provisioner Instance (Deployed)
 
 ## Goal
 With F5 Automation provisioner and these Scenario Use Cases, users can/will be able to  
