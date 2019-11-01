@@ -1,5 +1,5 @@
-# PREREQUISITES
-- Instance of the [F5 Ansible AWS Provisioner](https://github.com/f5alliances/f5_provisioner) deployed
+## PREREQUISITES
+Instance of the [F5 Ansible AWS Provisioner](https://github.com/f5alliances/f5_provisioner) deployed
 
 ## Overview of Use Case
 This use case will configure the BIG-IP to provision BIG-IP ASM, create a Virtual IP (VIP) including a Pool and nodes, an ASM Policy for the use case, then modify the created ASM Policy to Block IP's and URL's.  
@@ -13,8 +13,9 @@ This script can be modified to work on other URLs or IP's by editing the Blocked
 ## Use Case Setup
 
 1. Login to the Ansible Host provided by the F5 Ansible AWS Provisioner 
-  ```
-   - Use the Workbench information that is stored in a local directory named after the workshop (e.g. TESTWORKSHOP1/instructor_inventory.txt).  Example:
+   
+   Use the Workbench information that is stored in a local directory named after the workshop (e.g. TESTWORKSHOP1/instructor_inventory.txt).  Example:
+   
    ```handlebars
    [all:vars]
    ansible_port=22
@@ -27,14 +28,18 @@ This script can be modified to work on other URLs or IP's by editing the Blocked
    ```
 
 2. Launching the Ansible Playbook:
-```
+   
+   ```
+   cd ~/f5_ansible_use_cases
    ansible-playbook F5-ASM-URL-IP-Blocking.yaml -e @f5_vars.yml
-```
-![Use-Case 3](../images/UseCase3-960.gif)
- 
+   ```
+   <kbd>
+    <img src="../images/UseCase3-960.gif">
+   </kbd>   
+
+   <br/>
+   
+   
 3. Testing and Validating 
-```
-- Using the workbench information Login to the BIG-IP (e.g. student1-f5 ansible_host=PUBLIC-IP) using the ansible_host Public IP on port 8443 (e.g. https://PUBLIC-IP:8443) to view the BIG-IP Admin page 
-  
-- To view the deployed use case access port 8082 of the same Public IP Address (e.g. https://PUBLIC-IP:8082) 
-``` 
+   - Using the workbench information Login to the BIG-IP (e.g. student1-f5 ansible_host=PUBLIC-IP) using the ansible_host Public IP on port 8443 (e.g. https://PUBLIC-IP:8443) to view the BIG-IP Admin page 
+   - To view the deployed use case access port 8082 of the same Public IP Address (e.g. https://PUBLIC-IP:8082) 

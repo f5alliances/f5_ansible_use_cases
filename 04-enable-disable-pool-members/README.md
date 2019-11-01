@@ -1,5 +1,5 @@
-# PREREQUISITES
-- Instance of the [F5 Ansible AWS Provisioner](https://github.com/f5alliances/f5_provisioner) deployed
+## PREREQUISITES
+Instance of the [F5 Ansible AWS Provisioner](https://github.com/f5alliances/f5_provisioner) deployed
 
 ## Overview of Use Case
 This use case will configure the BIG-IP To Enable or Disable LTM Pool Members.  
@@ -11,8 +11,9 @@ There are times where servers must be taken offline to provide upgrades, trouble
 ## Use Case Setup
 
 1. Login to the Ansible Host provided by the F5 Ansible AWS Provisioner 
-  ```
-   - Use the Workbench information that is stored in a local directory named after the workshop (e.g. TESTWORKSHOP1/instructor_inventory.txt).  Example:
+   
+   Use the Workbench information that is stored in a local directory named after the workshop (e.g. TESTWORKSHOP1/instructor_inventory.txt).  Example:
+   
    ```handlebars
    [all:vars]
    ansible_port=22
@@ -25,18 +26,24 @@ There are times where servers must be taken offline to provide upgrades, trouble
    ```
 
 2. Launching the Ansible Playbook:
-```
- # To Enable Pool Members
- ansible-playbook F5-LTM-Member-Enable-Disable.yaml -e @f5_vars.yml -e "pool_action=enable"
+   
+   ```
+   cd ~/f5_ansible_use_cases
+   
+   # To Enable Pool Members
+   ansible-playbook F5-LTM-Member-Enable-Disable.yaml -e @f5_vars.yml -e "pool_action=enable"
  
- # To Disable Pool Members
- ansible-playbook F5-LTM-Member-Enable-Disable.yaml -e @f5_vars.yml -e "pool_action=disable"
-```
-![Use-Case 4](../images/UseCase4-960.gif)
- 
+   # To Disable Pool Members
+   ansible-playbook F5-LTM-Member-Enable-Disable.yaml -e @f5_vars.yml -e "pool_action=disable"
+   ```
+
+   <kbd>
+    <img src="../images/UseCase4-960.gif">
+   </kbd>   
+
+   <br/> 
+
 3. Testing and Validating 
-```
-- Using the workbench information Login to the BIG-IP (e.g. student1-f5 ansible_host=PUBLIC-IP) using the ansible_host Public IP on port 8443 (e.g. https://PUBLIC-IP:8443) to view the BIG-IP Admin page 
-  
-- To view the deployed use case access port 8083 of the same Public IP Address (e.g. https://PUBLIC-IP:8083) 
-``` 
+   - Using the workbench information Login to the BIG-IP (e.g. student1-f5 ansible_host=PUBLIC-IP) using the ansible_host Public IP on port 8443 (e.g. https://PUBLIC-IP:8443) to view the BIG-IP Admin page 
+   - To view the deployed use case access port 8083 of the same Public IP Address (e.g. https://PUBLIC-IP:8083) 
+   

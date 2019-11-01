@@ -1,5 +1,5 @@
-# PREREQUISITES
-- Instance of the [F5 Ansible AWS Provisioner](https://github.com/f5alliances/f5_provisioner) deployed
+## PREREQUISITES
+Instance of the [F5 Ansible AWS Provisioner](https://github.com/f5alliances/f5_provisioner) deployed
 
 ## Overview of Use Case
 This use case will download the latest AS3 Module and install it on the BIG-IP.  
@@ -11,8 +11,9 @@ Application Services 3 Extension (referred to as AS3 Extension or more often sim
 ## Use Case Setup
 
 1. Login to the Ansible Host provided by the F5 Ansible AWS Provisioner 
-  ```
-   - Use the Workbench information that is stored in a local directory named after the workshop (e.g. TESTWORKSHOP1/instructor_inventory.txt).  Example:
+   
+   Use the Workbench information that is stored in a local directory named after the workshop (e.g. TESTWORKSHOP1/instructor_inventory.txt).  Example:
+   
    ```handlebars
    [all:vars]
    ansible_port=22
@@ -25,13 +26,18 @@ Application Services 3 Extension (referred to as AS3 Extension or more often sim
    ```
 
 2. Launching the Ansible Playbook:
-```
- ansible-playbook F5-Install-AS3-Package.yaml
-```
-![Use-Case 5](../images/UseCase5-960.gif)
- 
+
+   ```
+   cd ~/f5_ansible_use_cases
+   ansible-playbook F5-Install-AS3-Package.yaml
+   ```
+   
+   <kbd>
+    <img src="../images/UseCase5-960.gif">
+   </kbd>   
+
+   <br/> 
+   
 3. Testing and Validating 
-```
-- Using the workbench information Login to the BIG-IP (e.g. student1-f5 ansible_host=PUBLIC-IP) using the ansible_host Public IP on port 8443 (e.g. https://PUBLIC-IP:8443) to view the BIG-IP Admin page 
-  
-``` 
+   - Using the workbench information Login to the BIG-IP (e.g. student1-f5 ansible_host=PUBLIC-IP) using the ansible_host Public IP on port 8443 (e.g. https://PUBLIC-IP:8443) to view the BIG-IP Admin page 
+   
