@@ -36,5 +36,5 @@ This script can be modified to work on other VIPs by editing the F5_VIP_Name sec
   
 - To view the deployed use case access port 8081 of the same Public IP Address (e.g. https://PUBLIC-IP:8081) 
 ``` 
-**NOTE: The browser certificate used in this scenario is a Self Signed UNTRUSTED Certificate.**
+**NOTE: The browser certificate used in this scenario is a "Self Signed" UNTRUSTED Certificate.**
 
