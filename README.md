@@ -19,7 +19,11 @@ With F5 Automation provisioner and these Scenario Use Cases, users can/will be a
 Follow [F5 Ansible AWS Provisioner](https://github.com/f5alliances/f5_provisioner) for detailed steps to spin up and tear down the sandbox infrastructure using provisioner
 
 1. Login to the Ansible Host (**studentX-ansible**) provided by the F5 Ansible AWS Provisioner
-   Use the Workbench information that is stored in a local directory named after the workshop (e.g. TESTWORKSHOP1/instructor_inventory.txt).  Example:
+
+   Use the Workbench information that is stored in a local directory named after the workshop    
+   (e.g.TESTWORKSHOP1/instructor_inventory.txt).  
+   
+   Example:
    
    ```handlebars
    [all:vars]
@@ -39,7 +43,10 @@ Follow [F5 Ansible AWS Provisioner](https://github.com/f5alliances/f5_provisione
    git clone https://github.com/f5alliances/f5_ansible_use_cases.git
    ```
    
-![GitHub Download](images/Github-960.gif)
+<kbd>
+  <img src="images/Github-960.gif">
+  <br>
+</kbd>   
 
 3. Launch a Playbook via the use cases.
 
