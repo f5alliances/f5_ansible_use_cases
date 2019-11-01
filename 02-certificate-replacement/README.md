@@ -28,7 +28,7 @@ This script can be modified to work on other VIPs by editing the F5_VIP_Name sec
 ```
    ansible-playbook F5-LTM-Cert-Management-Replacement.yaml -e @f5_vars.yml
 ```
-![Use-Case 1](../images/UseCase2-960.gif)
+![Use-Case 2](../images/UseCase2-960.gif)
  
 3. Testing and Validating 
 ```
