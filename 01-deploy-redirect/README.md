@@ -30,15 +30,15 @@ In this example, the playbook looks for F5_VIP_Name: 'Use-Case-1-VIP' as specifi
 2. Running the Ansible Playbook 'F5-LTM-HTTP-Redirect.yml' with the variable file 'f5_vars.yml' :
 
    ```
-      cd ~/f5_ansible_use_cases
-      ansible-playbook F5-LTM-HTTP-Redirect.yml -e @f5_vars.yml
-   
-      <kbd>
-       <img src="images/UseCase1-960.gif">
-      </kbd>   
-
-      <br/>
+   cd ~/f5_ansible_use_cases
+   ansible-playbook F5-LTM-HTTP-Redirect.yml -e @f5_vars.yml
    ```
+   
+   <kbd>
+    <img src="../images/UseCase1-960.gif">
+   </kbd>   
+
+   <br/>
  
 3. Testing and Validating 
    - Using the workbench information Login to the BIG-IP (e.g. student1-f5 ansible_host=10.10.10.21:8443) and ensure there is 2 VIPs with same IP - one with port 443 and one with port 80
