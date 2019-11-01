@@ -1,26 +1,18 @@
 # PREREQUISITES
-- Ansible Engine v2.8.0 or higher.
-- BIG-IP Setup and Configured
+- Instance of the [F5 Ansible AWS Provisioner](https://github.com/f5alliances/f5_provisioner) deployed
 
 ## Overview of Use Case
+This scenairo will configure the BIG-IP To import certificates (cert/key), create (if doesnt already exist) a Virtual IP (VIP), a Pool and ClientSSL Profile and assign it to the created VIP (Use-Case-2).
 
-This use case will configure the BIG-IP To import certificates (cert/key), create (if doesnt already exist) a ClientSSL Profile and assign it to an assigned pre-existing VIP.
+Being able to create and swap SSL Profiles on a BIG-IP to singular or multiple VIPs is extremly useful, especially in today's world where SSL keys get leaked or hacked or expire.  This automated method allows a seamless process to create and change certificates based on need/demand.
 
+This script can be modified to work on other VIPs by editing the F5_VIP_Name section inside of the f5_vars.yaml
+  
 ## Use Case Setup
 
-1. Confiure f5_vars.yml to reflect your environment under provisioning.
-  ```yaml
-        # Modify based on deployment
-        F5_IPAddress: 10.192.1.219
-        F5_Admin_Port: '443'
-        F5_Username: admin
-        F5_Password: VMware123!
-        F5_VIP_App_Name: Test2-VIP
-        Cert_Name: app1_certificate.crt
-        Key_Name:  app1_key.key
-        F5_Cert_Friendly_Name: Application1
+1. Login to the Ansible Host provided by the F5 Ansible AWS Provisioner 
   ```
-   - if using F5_Provisioner use the Workbench information that is stored in a local directory named after the workshop (e.g.    TESTWORKSHOP1/instructor_inventory.txt).  Example:
+   - Use the Workbench information that is stored in a local directory named after the workshop (e.g. TESTWORKSHOP1/instructor_inventory.txt).  Example:
    ```handlebars
    [all:vars]
    ansible_port=22
@@ -32,12 +24,17 @@ This use case will configure the BIG-IP To import certificates (cert/key), creat
    student1-host2 ansible_host=34.215.176.xxx ansible_user=centos
    ```
 
-2. Run the playbook 
+2. Launching the Ansible Playbook:
+```
+   ansible-playbook F5-LTM-Cert-Management-Replacement.yaml -e @f5_vars.yml
+```
+![Use-Case 1](../images/UseCase2-960.gif)
+ 
+3. Testing and Validating 
+```
+- Using the workbench information Login to the BIG-IP (e.g. student1-f5 ansible_host=PUBLIC-IP) using the ansible_host Public IP on port 8443 (e.g. https://PUBLIC-IP:8443) to view the BIG-IP Admin page 
+  
+- To view the deployed use case access port 8081 of the same Public IP Address (e.g. https://PUBLIC-IP:8081) 
+``` 
+**NOTE: The browser certificate used in this scenario is a Self Signed UNTRUSTED Certificate.**
 
-  - Using Ansible Tower copy the variables out of the f5_vars.yml file and place into the Extra Variables field in the Template.
-![f5 diagram](images/Ansible_Tower_Vars.png)
-
-  - (Alternative Option) - Using Ansible Playbook:
-
-        ansible-playbook F5-LTM-Cert-Management-Replacement.yaml -e @f5_vars.yml
-        
