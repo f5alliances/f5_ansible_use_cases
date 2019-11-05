@@ -1,5 +1,5 @@
-USE CASE: Deploy configuration that redirects unsecure web traffic(80) to secure web traffic (443)
-==================================================================================================
+Use Case 01: Redirect http to https traffic
+===========================================
 
 PREREQUISITES
 -------------
