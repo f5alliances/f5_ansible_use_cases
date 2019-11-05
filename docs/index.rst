@@ -70,3 +70,11 @@ automation and is maintained by F5 Business Development (BD). For any
 feature requests or issues, feel free to open an
 `issue <https://github.com/f5alliances/f5_ansible_use_cases/issues>`__
 and we will give our best effort to address it.
+
+ :caption: 
+   :glob:
+   :maxdepth: 2
+   :hidden:
+
+   01-deploy-redirect-readme.rst
+   
