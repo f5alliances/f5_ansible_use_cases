@@ -71,7 +71,8 @@ feature requests or issues, feel free to open an
 `issue <https://github.com/f5alliances/f5_ansible_use_cases/issues>`__
 and we will give our best effort to address it.
 
- :caption: 
+.. toctree::
+   :caption: 
    :glob:
    :maxdepth: 2
    :hidden:
