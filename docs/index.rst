@@ -79,3 +79,4 @@ and we will give our best effort to address it.
    :hidden:
 
    01-deploy-redirect-readme.rst
+   02-certificate-replacement-readme.rst
