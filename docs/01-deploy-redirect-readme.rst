@@ -22,8 +22,9 @@ In this example, the playbook looks for F5_VIP_Name: ‘Use-Case-1-VIP’ as
 specified in the f5_vars.yaml variable file. Users can modify this
 variable file to create redirect service for any other VIP.
 
-**Note: this will loop through the entire VIP list so this could take
-time depending on the number of VIPs within your BIG-IP**
+.. note::
+
+  This will loop through the entire VIP list so this could take time depending on the number of VIPs within your BIG-IP
 
 Use Case Setup
 --------------
