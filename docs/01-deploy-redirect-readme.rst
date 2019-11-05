@@ -36,7 +36,7 @@ Use Case Setup
    TESTWORKSHOP1/instructor_inventory.txt file will contain the
    Workbench information. Example:
 
-   .. code:: handlebars
+   .. code:: 
 
          [all:vars]
          ansible_port=22
