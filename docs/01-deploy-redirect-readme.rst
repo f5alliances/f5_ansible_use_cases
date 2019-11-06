@@ -35,25 +35,24 @@ Use Case Setup
       cd ~/f5_ansible_use_cases/01-deploy-redirect
       ansible-playbook F5-LTM-HTTP-Redirect.yml -e @f5_vars.yml
    
-4. Testing and Validating
+3. Testing and Validating
    
+   - Login to the BIG-IP
    - Navigate to Local traffic->Virtual server
    - Ensure there are 2 VIPs with same IP 
    
      - One listening on port 443
      - One listening on port 80
    
-   - Access the VIP on port 80 you will be redirected to 443 (http://52.39.228.xxx:80)
-   - The same webpage will also be accessible via VIP:443 (https://52.39.228.xxx:443)
+   - Access the VIP on port 80 you will be redirected to 443 (http://VIP:80)
+   - The same webpage will also be accessible via VIP:443 (https://VIP:443)
    
    .. note::
 
       The IP address shown will differ from your IP address, make sure to use your own inventory file
 
    |
-   
    .. image:: images/UseCase1-960.gif
-
    |
    
    .. note::
