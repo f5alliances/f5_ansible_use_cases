@@ -54,8 +54,8 @@ Use Case Setup
 
       cd ~/f5_ansible_use_cases
       ansible-playbook F5-LTM-HTTP-Redirect.yml -e @f5_vars.yml
-
-   .. images:: images/UseCase1-960.gif
+      
+   .. image:: images/UseCase1-960.gif
 
 3. Testing and Validating
 
