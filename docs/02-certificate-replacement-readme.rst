@@ -1,7 +1,7 @@
 Use Case 02: Import/Apply certs and keys
 =========================================
 
-PREREQUISITES
+Prerequisites
 -------------
 
 Instance of the `F5 Ansible AWS
@@ -21,6 +21,7 @@ seamless process to create and change certificates based on need/demand.
 
 This script can be modified to work on other VIPs by editing the
 F5_VIP_Name section inside of the f5_vars.yaml
+ 
 
 Use Case Setup
 --------------
@@ -49,7 +50,7 @@ Use Case Setup
       cd ~/f5_ansible_use_cases
       ansible-playbook F5-LTM-Cert-Management-Replacement.yaml -e @f5_vars.yml
 
-   .. images:: images/UseCase2-960.gif
+   .. image:: images/UseCase2-960.gif
    
 3. Testing and Validating
 

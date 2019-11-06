@@ -1,7 +1,7 @@
 Use Case 01: Redirect http to https traffic
 ===========================================
 
-PREREQUISITES
+Prerequisites
 -------------
 
 This usecase assumes that a F5 BIG-IP instance, webservers and Ansible

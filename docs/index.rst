@@ -13,7 +13,7 @@ for BIG-IP Modules.
 Prerequisites
 -------------
 
-F5 Automation Provisioner Instance (Deployed)
+`F5 Automation Provisioner Instance <https://github.com/f5alliances/f5_provisioner>`__ (Deployed)
 
 Goal
 ----
@@ -27,8 +27,8 @@ With F5 Automation provisioner and these Scenario Use Cases, users can/will be a
 - Provide feedback on existing and new use cases that are
   relevant to everyday work (More features will be added soon)
 
-How to use?
------------
+How to use
+----------
 
 Follow `F5 Ansible AWS
 Provisioner <https://github.com/f5alliances/f5_provisioner>`__ for
@@ -62,6 +62,8 @@ provisioner
       cd ~/
       git clone https://github.com/f5alliances/f5_ansible_use_cases.git
 
+   .. image:: images/Github-960.gif
+
 3. Launch a Playbook via the use cases.
 
 Support
@@ -80,3 +82,6 @@ and we will give our best effort to address it.
 
    01-deploy-redirect-readme.rst
    02-certificate-replacement-readme.rst
+   03-waf-policy-manipulation-readme.rst
+   04-enable-disable-pool-members-readme.rst
+   05-install-as3-readme.rst
