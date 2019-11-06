@@ -4,17 +4,16 @@ Use Case 05: Install and enable AS3
 Prerequisites
 -------------
 
-Instance of the `F5 Ansible AWS
-Provisioner <https://github.com/f5alliances/f5_provisioner>`__ deployed
+This usecase assumes that a F5 BIG-IP instance, webservers and Ansible node are deployed. 
+To deploy infrastructure in AWS users can use the `F5 Ansible Provisioner <https://github.com/f5alliances/f5_provisioner>`__
+
 
 Overview of Use Case
 --------------------
 
-This use case will download the latest AS3 Module and install it on the
-BIG-IP.
+This use case will download the latest `AS3 RPM package <https://github.com/F5Networks/f5-appsvcs-extension/releases>_` and install it on the BIG-IP.
 
-Application Services 3 Extension (referred to as AS3 Extension or more
-often simply AS3) is a flexible, low-overhead mechanism for managing
+Application Services 3 Extension (referred to as AS3 Extension or more often simply AS3) is a flexible, low-overhead mechanism for managing
 application-specific configurations on a BIG-IP system.
 
 .. note::
@@ -25,35 +24,23 @@ application-specific configurations on a BIG-IP system.
 Use Case Setup
 --------------
 
-1. Login to the Ansible Host provided by the F5 Ansible AWS Provisioner
-
-   Use the Workbench information that is stored in a local directory
-   named after the workshop
-   (e.g. TESTWORKSHOP1/instructor_inventory.txt). Example:
-
-   .. code::
-
-      [all:vars]
-      ansible_port=22
-
-      [student1]
-      student1-ansible ansible_host=34.219.251.xxx ansible_user=centos 
-      student1-f5 ansible_host=52.39.228.xxx ansible_user=admin
-      student1-host1 ansible_host=52.43.153.xxx ansible_user=centos
-      student1-host2 ansible_host=34.215.176.xxx ansible_user=centos
+1. Login to the Ansible Host 
 
 2. Launching the Ansible Playbook:
 
    .. code::
 
-      cd ~/f5_ansible_use_cases
+      cd ~/f5_ansible_use_cases/05-install-as3
       ansible-playbook F5-Install-AS3-Package.yaml
 
    .. image:: images/UseCase5-960.gif
 
 3. Testing and Validating
 
-   -  Using the workbench information Login to the BIG-IP
-      (e.g. student1-f5 ansible_host=PUBLIC-IP) using the ansible_host
-      Public IP on port 8443 (e.g. https://PUBLIC-IP:8443) to view the
-      BIG-IP Admin page
+   - Login to the BIG-IP
+   - Navigate to iApps->Packet Management LX 
+   - Veirfy the AS3 RPM package is installed
+
+   |
+   .. image:: images/UseCase5-960.gif
+   |

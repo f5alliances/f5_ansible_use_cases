@@ -1,25 +1,22 @@
 Use Case 03: WAF policy Manupilation
 ====================================
 
-PREREQUISITES
+Prerequisites
 -------------
 
-Instance of the `F5 Ansible AWS
-Provisioner <https://github.com/f5alliances/f5_provisioner>`__ deployed
+This usecase assumes that a F5 BIG-IP instance, webservers and Ansible node are deployed. 
+To deploy infrastructure in AWS users can use the `F5 Ansible Provisioner <https://github.com/f5alliances/f5_provisioner>`__
+
 
 Overview of Use Case
 --------------------
 
-This use case will configure the BIG-IP to provision BIG-IP ASM, create
-a Virtual IP (VIP) including a Pool and nodes, an ASM Policy for the use
+This use case will configure the BIG-IP to provision BIG-IP ASM, create a Virtual IP (VIP) including a Pool and nodes, an ASM Policy for the use
 case, then modify the created ASM Policy to Block IP’s and URL’s.
 
-As a security consious vendor F5 wants to ensure that customers can find
-automated ways to block bad contenders either by IP or by specific URLs
-that are being attacked. This playbook was designed to allow customers
-to integrate with other security vendors or even ticketing based
-solutions like Service NOW to create a start to finish automated
-solution based on when attacks can occur.
+As a security consious vendor F5 wants to ensure that customers can find automated ways to block bad contenders either by IP or by specific URLs
+that are being attacked. This playbook was designed to allow customers to integrate with other security vendors or even ticketing based
+solutions like Service NOW to create a start to finish automated solution based on when attacks can occur.
 
 .. note::
 
@@ -33,37 +30,27 @@ solution based on when attacks can occur.
 Use Case Setup
 --------------
 
-1. Login to the Ansible Host provided by the F5 Ansible AWS Provisioner
-
-   Use the Workbench information that is stored in a local directory
-   named after the workshop
-   (e.g. TESTWORKSHOP1/instructor_inventory.txt). Example:
-
-   .. code::
-
-      [all:vars]
-      ansible_port=22
-
-      [student1]
-      student1-ansible ansible_host=34.219.251.xxx ansible_user=centos 
-      student1-f5 ansible_host=52.39.228.xxx ansible_user=admin
-      student1-host1 ansible_host=52.43.153.xxx ansible_user=centos
-      student1-host2 ansible_host=34.215.176.xxx ansible_user=centos
+1. Login to the Ansible Host 
 
 2. Launching the Ansible Playbook:
 
    .. code::
 
-      cd ~/f5_ansible_use_cases
+      cd ~/f5_ansible_use_cases/03-waf-policy-manipulation
       ansible-playbook F5-ASM-URL-IP-Blocking.yaml -e @f5_vars.yml
-
-   .. image:: images/UseCase3-960.gif
 
 3. Testing and Validating
 
-   -  Using the workbench information Login to the BIG-IP
-      (e.g. student1-f5 ansible_host=PUBLIC-IP) using the ansible_host
-      Public IP on port 8443 (e.g. https://PUBLIC-IP:8443) to view the
-      BIG-IP Admin page
-   -  To view the deployed use case access port 8082 of the same Public
-      IP Address (e.g. https://PUBLIC-IP:8082)
+   - Login to the BIG-IP
+   - Navigate to Security->Application security to view the WAF policy deployed
+   - Navigate to Local traffic->Virtual server
+   - View the deployed use case access VIP:port (8082)
+   - Access the VIP on port 8082 (https://VIP:8082)
+   - Access the URL's present in the f5_vars.yml file to see the WAF policy in action
+	 - https://VIP:8082/blocked.html 
+	 - https://VIP:8082/hacked.html
+	 - https://VIP:8082/robot.html 
+
+   |
+   .. image:: images/UseCase3-960.gif
+   |

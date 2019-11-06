@@ -38,7 +38,7 @@ Use Case Setup
    - Access the VIP on port 8081 to view the new self-signed certificate (https://VIP:8081)
 
    |
-   .. image:: images/UseCase1-960.gif
+   .. image:: images/UseCase2-960.gif
    |
    
 .. note::
