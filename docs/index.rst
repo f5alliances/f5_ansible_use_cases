@@ -68,6 +68,23 @@ detailed steps to spin up and tear down the sandbox infrastructure
    The repo has been cloned to the ansible control node.
    Browse through readme of each use case in the next section to execute the playbooks
 
+3. Login to the BIG-IP (**studentX-f5**) provided by the F5 Ansible AWS Provisioner
+   
+   Sample entry in inventory file: **student1-f5 ansible_host=52.39.228.xxx**
+   
+   - IP: BIG-IP from the inventory.txt file
+   - Port: 8443
+   - username: admin
+   - password: provided while running the provisioner in f5_vars.yml
+   
+   .. code::
+   
+      https://52.39.228.xxx:8443
+	  
+.. note::
+
+   Keep the BIG-IP login handy to login and validate configuration when use cases are executed
+   
 Support
 -------
 

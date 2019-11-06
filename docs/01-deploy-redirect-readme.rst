@@ -25,34 +25,17 @@ Users can modify this variable file to create redirect service for any other VIP
 Use Case Setup
 --------------
 
-1. Login to the Ansible Host.
+1. Login to the Ansible Host
 
 
-2. Running the Ansible Playbook ‘F5-LTM-HTTP-Redirect.yml’ with the variable file ‘f5_vars.yml’ :
+2. Run the Ansible Playbook ‘F5-LTM-HTTP-Redirect.yml’ with the variable file ‘f5_vars.yml’ :
 
    .. code::
 
       cd ~/f5_ansible_use_cases/01-deploy-redirect
       ansible-playbook F5-LTM-HTTP-Redirect.yml -e @f5_vars.yml
    
-3. BIG-IP access
-
-   Using the workbench information login to the BIG-IP
-   
-   - IP: BIG-IP from the inventory.txt file
-   - Port: 8443
-   - username: admin
-   - password: provided while running the provisioner in f5_vars.yml
-   
-   Sample entry in inventory file: **student1-f5 ansible_host=52.39.228.xxx**
-   
-   BIG-IP UI login:
-   
-   .. code:: browser
-   
-      https://52.39.228.xxx:8443
-   
-3. Testing and Validating
+4. Testing and Validating
    
    - Navigate to Local traffic->Virtual server
    - Ensure there are 2 VIPs with same IP 
@@ -62,6 +45,10 @@ Use Case Setup
    
    - Access the VIP on port 80 you will be redirected to 443 (http://52.39.228.xxx:80)
    - The same webpage will also be accessible via VIP:443 (https://52.39.228.xxx:443)
+   
+   .. note::
+
+      The IP address shown will differ from your IP address, make sure to use your own inventory file
 
    |
    
@@ -71,9 +58,5 @@ Use Case Setup
    
    .. note::
 
-      The IP address used will differ from your IP address's
-
       While accessing the Virtual IP, your browser is presented with a certificate (clientssl cert) that is built with the BIG-IP. 
       You will therefore see an ‘unsafe’ message. Click proceed to website.
-	  
-  
