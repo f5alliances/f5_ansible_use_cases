@@ -33,8 +33,6 @@ Use Case Setup
       cd ~/f5_ansible_use_cases/05-install-as3
       ansible-playbook F5-Install-AS3-Package.yaml
 
-   .. image:: images/UseCase5-960.gif
-
 3. Testing and Validating
 
    - Login to the BIG-IP
