@@ -11,7 +11,7 @@ New Use Cases will be Added Periodically to Provide Additional Senarios for BIG-
 Prerequisites
 -------------
 
-`F5 Automation Provisioner Instance <https://github.com/f5alliances/f5_provisioner>`__ (Deployed)
+[F5 Ansible Provisioner](https://github.com/f5alliances/f5_provisioner) (Deployed)
 
 Goal
 ----
@@ -23,4 +23,4 @@ With F5 Automation provisioner and these Scenario Use Cases, users can/will be a
 
 - Provide feedback on existing and new use cases that are relevant to everyday work (More features will be added soon)
 
-** `Click here to get started <https://f5-ansible-use-cases.readthedocs.io/en/draft/index.html>`_ **
+** [Click here to get started](https://f5-ansible-use-cases.readthedocs.io/en/draft/index.html)**
