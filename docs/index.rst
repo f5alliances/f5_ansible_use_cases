@@ -33,6 +33,7 @@ detailed steps to spin up and tear down the sandbox infrastructure
 1. Login to the Ansible Host (**studentX-ansible**) provided by the F5 Ansible AWS Provisioner
 
    The Workbench information that is stored in a local directory named after the workshop after the provisioner is run
+
    - Example: <<workshop_name>>/instructor_inventory.txt
 
    Sample inventory.txt file:
@@ -50,7 +51,7 @@ detailed steps to spin up and tear down the sandbox infrastructure
 
 2. Download the f5_ansible_use_cases Repo on the Ansible host
    
-   - IP: Ansible control node from the inventory.txt file
+   - IP: Ansible control node IP from the inventory.txt file
    - username: studentx
    - password: provided while running the provisioner in f5_vars.yml
 
@@ -71,7 +72,7 @@ Support
 -------
 
 This project is a community effort to promote Network and Security automation and is maintained by F5 Business Development (BD). 
-For anyfeature requests or issues, feel free to open an`issue <https://github.com/f5alliances/f5_ansible_use_cases/issues>`_
+For anyfeature requests or issues, feel free to open an `issue <https://github.com/f5alliances/f5_ansible_use_cases/issues>`_
 and we will give our best effort to address it.
 
 .. note::
