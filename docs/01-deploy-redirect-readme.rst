@@ -38,14 +38,14 @@ Use Case Setup
 
    .. code:: 
 
-         [all:vars]
-         ansible_port=22
+      [all:vars]
+      ansible_port=22
 
-         [student1]
-         student1-ansible ansible_host=10.10.10.11 ansible_user=centos #ansible host
-         student1-f5 ansible_host=10.10.10.21 ansible_user=admin #F5 BIG-IP
-         student1-host1 ansible_host=10.10.10.31 ansible_user=centos #Webserver1
-         student1-host2 ansible_host=10.10.10.32 ansible_user=centos #webserver2
+      [student1]
+      student1-ansible ansible_host=10.10.10.11 ansible_user=centos #ansible host
+      student1-f5 ansible_host=10.10.10.21 ansible_user=admin #F5 BIG-IP
+      student1-host1 ansible_host=10.10.10.31 ansible_user=centos #Webserver1
+      student1-host2 ansible_host=10.10.10.32 ansible_user=centos #webserver2
 
 2. Running the Ansible Playbook ‘F5-LTM-HTTP-Redirect.yml’ with the
    variable file ‘f5_vars.yml’ :
@@ -54,6 +54,8 @@ Use Case Setup
 
       cd ~/f5_ansible_use_cases
       ansible-playbook F5-LTM-HTTP-Redirect.yml -e @f5_vars.yml
+
+   .. images:: images/UseCase1-960.gif
 
 3. Testing and Validating
 

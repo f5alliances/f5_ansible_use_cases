@@ -49,6 +49,8 @@ Use Case Setup
       cd ~/f5_ansible_use_cases
       ansible-playbook F5-LTM-Cert-Management-Replacement.yaml -e @f5_vars.yml
 
+   .. images:: images/UseCase2-960.gif
+   
 3. Testing and Validating
 
    -  Using the workbench information Login to the BIG-IP
