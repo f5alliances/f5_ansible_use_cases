@@ -5,13 +5,12 @@ Prerequisites
 -------------
 
 This usecase assumes that a F5 BIG-IP instance, webservers and Ansible node are deployed. 
-To deploy infrastructure in AWS users can use the `F5 Ansible Provisioner <https://github.com/f5alliances/f5_provisioner>_`
-
+To deploy infrastructure in AWS users can use the `F5 Ansible Provisioner <https://github.com/f5alliances/f5_provisioner>`_
 
 Overview of Use Case
 --------------------
 
-This use case will download the latest `AS3 RPM package <https://github.com/F5Networks/f5-appsvcs-extension/releases>_` and install it on the BIG-IP.
+This use case will download the latest `AS3 RPM package <https://github.com/F5Networks/f5-appsvcs-extension/releases>`_ and install it on the BIG-IP.
 
 Application Services 3 Extension (referred to as AS3 Extension or more often simply AS3) is a flexible, low-overhead mechanism for managing
 application-specific configurations on a BIG-IP system.
