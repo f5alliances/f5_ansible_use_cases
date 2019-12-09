@@ -1,4 +1,4 @@
-Use Case 03: WAF policy Manupilation
+Use Case 03: WAF policy Manipulation
 ====================================
 
 Prerequisites
